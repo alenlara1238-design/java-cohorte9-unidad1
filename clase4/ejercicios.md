@@ -1,8 +1,8 @@
-# Ejercicios guiados de Java: arreglos y construcción de clases
+# Ejercicios guiados de Java: arreglos, listas de objetos y construcción de clases
 
 ## Objetivo general
 
-Fortalecer la capacidad de almacenar, organizar y modelar información en Java, mediante arreglos de tipos primitivos, arreglos de objetos y la construcción de clases que representen elementos de contextos cotidianos.
+Fortalecer la capacidad de organizar y manipular información en Java mediante arreglos de tipos primitivos, listas dinámicas de objetos (`List`), la creación de clases y la implementación de métodos que permitan gestionar información utilizando los principios de encapsulamiento.
 
 ---
 
@@ -126,43 +126,62 @@ Diseña una lógica que permita identificar cuántos personajes tienen energía 
 
 ---
 
-# Sección 2. Arreglos de objetos a partir de clases
+# Sección 2. Listas dinámicas de objetos y relaciones entre clases
 
-## Ejercicio 4. Biblioteca musical: arreglo de canciones
+En esta sección se trabajará con listas dinámicas utilizando `List` y `ArrayList`.
+
+El propósito es construir una clase que represente un elemento y otra clase que permita administrar una lista de objetos de ese tipo.
+
+Se trabajará con métodos que permitan:
+
+- Añadir objetos a una lista.
+- Imprimir el listado de objetos.
+- Eliminar elementos de la lista.
+
+---
+
+## Ejercicio 4. DevMusic: administración de una lista de canciones
 
 ### Contexto
 
-Una aplicación de música necesita almacenar información de varias canciones para mostrarlas en una lista de reproducción.
+Se desea desarrollar una pequeña aplicación que permita organizar canciones en una lista de reproducción.
 
-En lugar de almacenar únicamente nombres de canciones, se desea representar cada canción como un objeto.
+Cada canción tiene información propia y la lista de reproducción será responsable de almacenar, añadir, consultar e incluso eliminar canciones.
+
+La aplicación tendrá dos clases principales:
+
+- `Cancion`: representa una canción.
+- `ListaReproduccion`: permite administrar una lista de canciones.
 
 ### Objetivos
 
-- Crear una clase.
-- Definir atributos.
-- Crear un constructor.
-- Crear métodos getter.
-- Instanciar objetos.
-- Crear un arreglo de objetos.
-- Recorrer un arreglo de objetos.
+- Crear una clase con atributos.
+- Implementar un constructor.
+- Implementar métodos getter.
+- Utilizar `List<Cancion>`.
+- Utilizar `ArrayList`.
+- Crear métodos para añadir, imprimir y eliminar objetos.
+- Relacionar dos clases mediante un atributo que almacene objetos de otra clase.
+
+---
 
 ### Paso 1. Crear la clase `Cancion`
 
 Crea un archivo llamado `Cancion.java`.
 
-La clase debe representar una canción y tener los siguientes atributos:
+Esta clase debe representar una canción y contener los siguientes atributos:
 
 | Atributo | Tipo de dato |
-|---|---|
-| titulo | String |
-| artista | String |
-| duracion | int |
+| -------- | ------------ |
+| titulo   | String       |
+| artista  | String       |
+| duracion | int          |
 
 El atributo `duracion` representa la duración de la canción en segundos.
 
 ### Paso 2. Crear el constructor
 
-Define un constructor que permita inicializar los tres atributos al momento de crear una canción.
+Implementa un constructor que permita inicializar los tres atributos al momento de crear una canción.
 
 El constructor debe recibir:
 
@@ -170,7 +189,7 @@ El constructor debe recibir:
 - El nombre del artista.
 - La duración en segundos.
 
-### Paso 3. Crear métodos getter
+### Paso 3. Crear los métodos getter
 
 Implementa los métodos que permitan consultar:
 
@@ -180,45 +199,110 @@ Implementa los métodos que permitan consultar:
 
 No es necesario implementar setters en este ejercicio.
 
-### Paso 4. Crear la clase principal
+---
+
+### Paso 4. Crear la clase `ListaReproduccion`
+
+Crea un archivo llamado `ListaReproduccion.java`.
+
+Esta clase será responsable de almacenar y administrar las canciones.
+
+Define un atributo llamado `canciones` de tipo:
+
+`List<Cancion>`
+
+Para inicializar la lista, utiliza una implementación de tipo `ArrayList`.
+
+<text weight="medium" color="#0D9488">Pista:</text> Recuerda que debes importar las clases necesarias para utilizar `List` y `ArrayList`.
+
+---
+
+### Paso 5. Crear el método para añadir canciones
+
+Dentro de la clase `ListaReproduccion`, crea un método llamado `agregarCancion`.
+
+Este método debe:
+
+- Recibir un objeto de tipo `Cancion` como parámetro.
+- Añadir el objeto recibido a la lista de canciones.
+
+<text weight="medium" color="#0D9488">Pista:</text> Para añadir un elemento a una lista dinámica de Java se utiliza el método `add()`.
+
+---
+
+### Paso 6. Crear el método para imprimir las canciones
+
+Crea un método llamado `mostrarCanciones`.
+
+Este método debe:
+
+- Recorrer la lista de canciones.
+- Imprimir el título de cada canción.
+- Imprimir el artista.
+- Imprimir la duración.
+
+Utiliza los métodos getter de la clase `Cancion` para consultar los atributos.
+
+<text weight="medium" color="#0D9488">Pista:</text> Puedes utilizar un ciclo `for-each` para recorrer una lista.
+
+---
+
+### Paso 7. Crear el método para eliminar una canción
+
+Crea un método llamado `eliminarCancion`.
+
+Para este ejercicio, el método recibirá como parámetro la posición de la canción que se desea eliminar.
+
+El método debe:
+
+- Recibir un número que represente la posición de la canción.
+- Verificar que la posición exista dentro de la lista.
+- Eliminar la canción ubicada en esa posición.
+
+<text weight="medium" color="#0D9488">Pista:</text> Para eliminar un elemento de una lista utilizando su posición, puedes utilizar el método `remove(int index)`.
+
+Recuerda que las posiciones de las listas en Java comienzan en `0`.
+
+Por ejemplo, si una lista contiene cinco canciones, sus posiciones van de `0` a `4`.
+
+---
+
+### Paso 8. Crear la clase principal
 
 Crea una clase con el método `main` para ejecutar el ejercicio.
 
 Dentro de esta clase:
 
-- Crea cinco objetos de tipo `Cancion`.
-- Asigna información diferente a cada objeto.
-- Utiliza canciones de diferentes artistas.
-
-### Paso 5. Crear el arreglo
-
-Crea un arreglo de tipo `Cancion` que permita almacenar los cinco objetos creados.
-
-Asigna cada objeto a una posición del arreglo.
-
-### Paso 6. Recorrer el arreglo
-
-Utiliza un ciclo `for` para recorrer el arreglo.
-
-Por cada canción almacenada, imprime:
-
-- El título.
-- El artista.
-- La duración.
-
-Utiliza los métodos getter para acceder a los atributos de cada objeto.
-
-### Paso 7. Analizar el resultado
-
-Verifica que cada posición del arreglo almacene un objeto de tipo `Cancion` y que puedas consultar la información de cada uno.
-
-### Reto adicional
-
-Diseña una lógica que permita calcular la duración total de todas las canciones almacenadas en la lista de reproducción.
+- Instancia tres o más objetos de tipo `Cancion`.
+- Instancia un objeto de tipo `ListaReproduccion`.
+- Utiliza el método `agregarCancion` para incorporar las canciones a la lista.
 
 ---
 
-## Ejercicio 5. Catálogo de videojuegos
+### Paso 9. Mostrar la lista
+
+Utiliza el método `mostrarCanciones` para imprimir las canciones almacenadas en la lista de reproducción.
+
+Verifica que todas las canciones añadidas aparezcan correctamente.
+
+---
+
+### Paso 10. Eliminar una canción
+
+- Selecciona una posición de la lista.
+- Utiliza el método `eliminarCancion` para eliminar el elemento ubicado en esa posición.
+- Imprime nuevamente el listado de canciones.
+- Verifica que la canción seleccionada ya no aparezca en el listado.
+
+### Reto adicional
+
+Diseña un método que permita consultar cuántas canciones se encuentran actualmente almacenadas en la lista de reproducción.
+
+<text color="secondary" weight="medium">Concepto para analizar:</text> ¿Por qué la lista de canciones se encuentra como atributo de `ListaReproduccion` y no directamente en la clase principal?
+
+---
+
+## Ejercicio 5. GameHub: administración de videojuegos
 
 ### Contexto
 
@@ -226,19 +310,24 @@ Una plataforma de videojuegos necesita organizar un catálogo de juegos disponib
 
 Cada videojuego debe tener información que permita identificarlo y consultar sus características.
 
+Se desea crear una clase que represente un videojuego y otra clase que permita administrar un listado dinámico de videojuegos.
+
 ### Objetivos
 
 - Crear una clase con atributos.
 - Crear un constructor.
-- Crear getters.
-- Crear un arreglo de objetos.
-- Recorrer un arreglo de objetos.
+- Crear métodos getter.
+- Utilizar `List<Videojuego>`.
+- Crear una clase que administre una lista de objetos.
+- Implementar métodos para añadir, listar y eliminar videojuegos.
 
-### Paso 1. Diseñar la clase `Videojuego`
+---
+
+### Paso 1. Crear la clase `Videojuego`
 
 Crea una clase llamada `Videojuego`.
 
-Identifica y define tres atributos que permitan representar un videojuego.
+Define tres atributos que permitan representar un videojuego.
 
 Puedes utilizar como referencia los siguientes elementos:
 
@@ -250,35 +339,80 @@ Define los tipos de datos adecuados para cada atributo.
 
 ### Paso 2. Crear el constructor
 
-Implementa un constructor que permita inicializar los atributos del videojuego.
+Implementa un constructor que permita inicializar todos los atributos del videojuego.
 
-### Paso 3. Crear métodos getter
+### Paso 3. Crear los métodos getter
 
-Implementa los métodos getter necesarios para consultar cada atributo.
+Implementa los métodos que permitan consultar cada atributo.
 
-### Paso 4. Instanciar videojuegos
+### Paso 4. Crear la clase `CatalogoVideojuegos`
 
-En la clase principal:
+Crea una clase llamada `CatalogoVideojuegos`.
 
-- Crea cuatro objetos de tipo `Videojuego`.
-- Asigna información diferente a cada objeto.
-- Utiliza videojuegos de diferentes géneros.
+Esta clase debe tener un atributo que permita almacenar múltiples videojuegos.
 
-### Paso 5. Crear un arreglo
+Utiliza:
 
-Crea un arreglo de tipo `Videojuego` que permita almacenar los cuatro objetos.
+`List<Videojuego>`
 
-### Paso 6. Recorrer el arreglo
+Inicializa el atributo utilizando `ArrayList`.
 
-Utiliza un ciclo para recorrer el arreglo e imprimir la información de cada videojuego.
+### Paso 5. Crear el método para añadir videojuegos
 
-### Paso 7. Analizar el resultado
+Crea un método llamado `agregarVideojuego`.
 
-Comprueba que cada videojuego esté almacenado en una posición del arreglo y que sus atributos puedan consultarse mediante los getters.
+Este método debe:
+
+- Recibir un objeto de tipo `Videojuego`.
+- Añadir el objeto recibido a la lista.
+
+<text weight="medium" color="#0D9488">Pista:</text> Utiliza `add()`.
+
+### Paso 6. Crear el método para mostrar videojuegos
+
+Crea un método llamado `mostrarVideojuegos`.
+
+Este método debe recorrer la lista e imprimir:
+
+- Nombre del videojuego.
+- Género.
+- Año de lanzamiento.
+
+Utiliza los getters de la clase `Videojuego`.
+
+### Paso 7. Crear el método para eliminar videojuegos
+
+Crea un método llamado `eliminarVideojuego`.
+
+Este método debe recibir como parámetro la posición del videojuego que se desea eliminar.
+
+- Verifica que la posición sea válida.
+- Elimina el videojuego de la lista.
+
+<text weight="medium" color="#0D9488">Pista:</text> Utiliza `remove(int index)` para eliminar un elemento a partir de su posición.
+
+### Paso 8. Crear la clase principal
+
+Dentro de la clase principal:
+
+- Crea al menos cuatro objetos de tipo `Videojuego`.
+- Instancia un objeto de tipo `CatalogoVideojuegos`.
+- Añade los videojuegos al catálogo utilizando el método creado.
+
+### Paso 9. Consultar el catálogo
+
+Utiliza el método `mostrarVideojuegos` para imprimir todos los videojuegos almacenados.
+
+### Paso 10. Eliminar un videojuego
+
+- Selecciona una posición del catálogo.
+- Elimina el videojuego utilizando el método correspondiente.
+- Imprime nuevamente el catálogo.
+- Verifica que el videojuego haya sido eliminado.
 
 ### Reto adicional
 
-Utiliza una condición para identificar los videojuegos que fueron lanzados después del año 2020.
+Diseña un método que permita consultar la cantidad de videojuegos que se encuentran almacenados en el catálogo.
 
 ---
 
@@ -311,8 +445,6 @@ Observa el concepto de personaje de videojuego.
 
 Identifica al menos tres características que permitan describirlo.
 
-Por ejemplo, puedes considerar características relacionadas con su identidad, estado o capacidades.
-
 ### Paso 2. Identificar atributos
 
 Define al menos tres atributos que representen las características identificadas.
@@ -326,10 +458,10 @@ Para cada atributo:
 Organiza tu propuesta en una tabla antes de comenzar a programar.
 
 | Atributo | Tipo de dato | ¿Qué representa? |
-|---|---|---|
-| | | |
-| | | |
-| | | |
+| -------- | ------------ | ---------------- |
+|          |              |                  |
+|          |              |                  |
+|          |              |                  |
 
 ### Paso 3. Crear la clase
 
@@ -383,7 +515,7 @@ Por ejemplo, una característica que no debería ser negativa.
 
 ### Contexto
 
-Una tienda de tecnología necesita representar los dispositivos que comercializa. Para este ejercicio, se trabajará con un dispositivo específico: un teléfono inteligente.
+Una tienda de tecnología necesita representar los dispositivos que comercializa. Para este ejercicio, se trabajará con un teléfono inteligente.
 
 ### Paso 1. Analizar el elemento
 
@@ -404,10 +536,10 @@ Puedes considerar características relacionadas con:
 Registra los atributos y sus tipos de datos.
 
 | Atributo | Tipo de dato | ¿Qué representa? |
-|---|---|---|
-| | | |
-| | | |
-| | | |
+| -------- | ------------ | ---------------- |
+|          |              |                  |
+|          |              |                  |
+|          |              |                  |
 
 ### Paso 3. Crear la clase
 
@@ -480,10 +612,10 @@ Considera aspectos como:
 Selecciona los tipos de datos adecuados.
 
 | Atributo | Tipo de dato | ¿Qué representa? |
-|---|---|---|
-| | | |
-| | | |
-| | | |
+| -------- | ------------ | ---------------- |
+|          |              |                  |
+|          |              |                  |
+|          |              |                  |
 
 ### Paso 3. Crear la clase
 
@@ -527,13 +659,15 @@ Piensa en una manera de controlar los valores que recibe esta característica me
 
 Una vez finalizados los ejercicios, responde las siguientes preguntas con tus propias palabras:
 
-1. ¿Qué diferencia existe entre almacenar datos de tipo primitivo en un arreglo y almacenar objetos en un arreglo?
-2. ¿Qué ventajas ofrece representar una canción, un videojuego o un teléfono mediante una clase?
-3. ¿Qué función cumple el constructor al crear un objeto?
-4. ¿Por qué se utilizan los métodos getter para consultar atributos?
-5. ¿Qué utilidad tienen los setters cuando se necesita modificar la información de un objeto?
-6. ¿Qué criterios utilizaste para identificar los atributos de una clase?
-7. ¿Qué otras características o comportamientos podrían agregarse a las clases que construiste?
+1. ¿Qué diferencia existe entre almacenar datos de tipo primitivo en un arreglo y almacenar objetos en una lista dinámica?
+2. ¿Qué ventajas ofrece utilizar `List` frente a un arreglo cuando la cantidad de elementos puede cambiar?
+3. ¿Qué función cumple el método `add()` en una lista?
+4. ¿Qué función cumple el método `remove()` y qué diferencia existe entre eliminar por posición y eliminar por objeto?
+5. ¿Por qué una clase puede tener como atributo una lista de objetos de otra clase?
+6. ¿Qué función cumple el constructor al crear un objeto?
+7. ¿Qué utilidad tienen los getters y setters?
+8. ¿Qué criterios utilizaste para identificar los atributos de una clase?
+9. ¿Qué otras características o comportamientos podrían agregarse a las clases que construiste?
 
 ## Recomendaciones para el desarrollo
 
@@ -541,7 +675,7 @@ Una vez finalizados los ejercicios, responde las siguientes preguntas con tus pr
 - Utiliza nombres descriptivos para las clases, atributos y métodos.
 - Mantén los atributos con acceso `private`.
 - Utiliza constructores para inicializar los objetos.
-- Utiliza getters y setters para consultar y modificar los atributos.
+- Utiliza getters y setters para consultar y modificar los atributos cuando corresponda.
+- Utiliza `List` como tipo de atributo y `ArrayList` como implementación.
 - Verifica los resultados en consola.
 - No copies las clases de otros ejercicios sin analizar qué representan sus atributos y comportamientos.
-
